@@ -18,7 +18,6 @@ const app = Vue.createApp({
         this.latitude = data['latitude']
         this.longitude = data['longitude']
       });
-      document.getElementById("location").textContent = "Hai"
   }
 });
 
