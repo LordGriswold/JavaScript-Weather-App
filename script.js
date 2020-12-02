@@ -1,3 +1,5 @@
+var dateObject = new Date();
+
 const app = Vue.createApp({
   data() {
     return {
@@ -5,7 +7,9 @@ const app = Vue.createApp({
       region: null,
       country: null,
       latitude: null,
-      longitude: null
+      longitude: null,
+      date: dateObject.getMonth() + 1 + "/" + dateObject.getDate() + "/" + dateObject.getFullYear() + ", " +
+      dateObject.getHours() + ":" + dateObject.getMinutes() + ":" + dateObject.getSeconds()
     }
   },
   created() {
@@ -17,7 +21,13 @@ const app = Vue.createApp({
         this.country = data['country_name']
         this.latitude = data['latitude']
         this.longitude = data['longitude']
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.region}&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
+          .then(response => response.json())
+          .then(data => {
+           console.log(data);
+        });
       });
+
   }
 });
 

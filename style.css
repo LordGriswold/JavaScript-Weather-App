@@ -53,3 +53,8 @@
     background:   rgb(75,75,75);
     box-shadow: 1px 1px 2px rgba(200,200,0,0.4);
 }
+
+ul {
+    text-align: center;
+    list-style-position: inside;
+}
