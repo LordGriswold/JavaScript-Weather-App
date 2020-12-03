@@ -8,14 +8,15 @@ const app = Vue.createApp({
       country: null,
       latitude: null,
       longitude: null,
-      date: dateObject.getMonth() + 1 + "/" + dateObject.getDate() + "/" + dateObject.getFullYear() + ", " +
+      date: dateObject.getFullYear() + "-" + (dateObject.getMonth() + 1) + "-" + dateObject.getDate() + " " +
       dateObject.getHours() + ":" + dateObject.getMinutes() + ":" + dateObject.getSeconds(),
       temperature: null,
       high: null,
       low: null,
       conditions: null,
       humidity: null,
-      pressure: null
+      pressure: null,
+      forecastList: null
     }
   },
   created() {
@@ -41,7 +42,7 @@ const app = Vue.createApp({
         fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&units=imperial&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
           .then(response => response.json())
           .then(data => {
-            console.log(data)
+            this.forecastList = data["list"];
         });
       });
 

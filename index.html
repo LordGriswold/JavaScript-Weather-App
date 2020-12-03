@@ -24,7 +24,7 @@
 			</div>
 			<div class="shadowed stuff-box yellow">
 				<h2>
-					Current conditions @ {{date}}
+					Current conditions for {{date}}
 				</h2>
 				<p>
 					<ul>
@@ -41,6 +41,21 @@
 				<h2>
 					5 day 3-hour forecast
 				</h2>
+				<div v-for="element in forecastList" class="shadowed stuff-box black">
+					<h2>
+						Current conditions for {{element["dt_txt"]}}
+					</h2>
+					<p>
+						<ul>
+							<li>Temperature: {{element["main"]["temp"]}}F</li>
+							<li>High: {{element["main"]["temp_max"]}}F</li>
+							<li>Low: {{element["main"]["temp_min"]}}F</li>
+							<li>Conditions: {{element["weather"][0]["description"]}}</li>
+							<li>Humidity: {{element["main"]["humidity"]}}%</li>
+							<li>Pressure: {{element["main"]["pressure"]}} hPa</li>
+						</ul>
+					</p>
+				</div>
 			</div>
 
 
