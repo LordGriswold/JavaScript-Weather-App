@@ -36,7 +36,12 @@ const app = Vue.createApp({
             this.low = data["main"]["temp_min"];
             this.conditions = data["weather"][0]["description"];
             this.humidity = data["main"]["humidity"];
-            this.pressure = data["main"["pressure"]];
+            this.pressure = data["main"]["pressure"];
+        });
+        fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&units=imperial&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
         });
       });
 
