@@ -3,6 +3,7 @@ var dateObject = new Date();
 const app = Vue.createApp({
   data() {
     return {
+      ip: null,
       city: null,
       region: null,
       country: null,
@@ -20,32 +21,36 @@ const app = Vue.createApp({
     }
   },
   created() {
-    fetch('http://api.ipstack.com/129.123.221.168?access_key=73089b0934963bb5ad9bca59add2aa3b')
+    fetch('http://api.ipstack.com/check?access_key=73089b0934963bb5ad9bca59add2aa3b')
       .then(response => response.json())
       .then(data => {
-        this.city = data['city'];
-        this.region = data['region_name'];
-        this.country = data['country_name'];
-        this.latitude = data['latitude'];
-        this.longitude = data['longitude'];
-
-        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&units=imperial&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
+        this.ip = data['ip'];
+        fetch(`http://api.ipstack.com/${this.ip}?access_key=73089b0934963bb5ad9bca59add2aa3b`)
           .then(response => response.json())
           .then(data => {
-            this.temperature = data["main"]["temp"];
-            this.high = data["main"]["temp_max"];
-            this.low = data["main"]["temp_min"];
-            this.conditions = data["weather"][0]["description"];
-            this.humidity = data["main"]["humidity"];
-            this.pressure = data["main"]["pressure"];
-        });
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&units=imperial&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
-          .then(response => response.json())
-          .then(data => {
-            this.forecastList = data["list"];
-        });
-      });
+            this.city = data['city'];
+            this.region = data['region_name'];
+            this.country = data['country_name'];
+            this.latitude = data['latitude'];
+            this.longitude = data['longitude'];
 
+            fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&units=imperial&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
+              .then(response => response.json())
+              .then(data => {
+                this.temperature = data["main"]["temp"];
+                this.high = data["main"]["temp_max"];
+                this.low = data["main"]["temp_min"];
+                this.conditions = data["weather"][0]["description"];
+                this.humidity = data["main"]["humidity"];
+                this.pressure = data["main"]["pressure"];
+            });
+            fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&units=imperial&appid=7aff086bc86f7fe1b8fb0b16ab1accb5`)
+              .then(response => response.json())
+              .then(data => {
+                this.forecastList = data["list"];
+            });
+        });
+    });
   }
 });
 
