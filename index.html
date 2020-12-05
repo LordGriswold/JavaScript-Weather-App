@@ -19,15 +19,18 @@
 				<h2>
 					Your location
 				</h2>
-				
-				You are located in {{city}}, {{region}}, {{country}} at coordinates ({{latitude}}, {{longitude}})
+				<p v-if="gotCoordinates">
+					You are located in {{city}}, {{region}}, {{country}} at coordinates ({{latitude}}, {{longitude}})
+				</p>
+				<p v-else>
+					Loading...
+				</p>
 			</div>
 			<div class="shadowed stuff-box yellow">
 				<h2>
 					Current conditions for {{date}}
 				</h2>
-				<p>
-					<ul>
+					<ul v-if="gotWeather">
 						<li>Temperature: {{temperature}}F</li>
 						<li>High: {{high}}F</li>
 						<li>Low: {{low}}F</li>
@@ -35,12 +38,20 @@
 						<li>Humidity: {{humidity}}%</li>
 						<li>Pressure: {{pressure}} hPa</li>
 					</ul>
-				</p>
+					<p v-else>
+						Loading...
+					</p>
 			</div>
 			<div class="shadowed stuff-box grey">
 				<h2>
 					5 day 3-hour forecast
 				</h2>
+				<p v-if="gotForecast">
+
+				</p>
+				<p v-else>
+					Loading...
+				</p>
 				<div v-for="element in forecastList" class="shadowed stuff-box black">
 					<h2>
 						Current conditions for {{element["dt_txt"]}}
@@ -55,6 +66,7 @@
 							<li>Pressure: {{element["main"]["pressure"]}} hPa</li>
 						</ul>
 					</p>
+
 				</div>
 			</div>
 
