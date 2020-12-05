@@ -20,7 +20,10 @@ const app = Vue.createApp({
       forecastList: null,
       gotCoordinates: false,
       gotWeather: false,
-      gotForecast: false
+      gotForecast: false,
+      unlikelyCount: 0,
+      neutralCount: 40,
+      likelyCount: 0
     }
   },
   created() {
@@ -57,6 +60,26 @@ const app = Vue.createApp({
             });
         });
     });
+  },
+  methods: {
+    increment(event) {
+
+      if (event["path"][2].className === "shadowed stuff-box black") {
+        event["path"][2].className = "shadowed stuff-box red";
+        this.neutralCount--;
+        this.unlikelyCount++;
+      }
+      else if (event["path"][2].className === "shadowed stuff-box red") {
+        event["path"][2].className = "shadowed stuff-box green";
+        this.unlikelyCount--;
+        this.likelyCount++;
+      }
+      else if (event["path"][2].className === "shadowed stuff-box green") {
+        event["path"][2].className = "shadowed stuff-box black";
+        this.likelyCount--;
+        this.neutralCount++;
+      }
+    }
   }
 });
 

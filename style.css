@@ -64,3 +64,15 @@ ul {
     text-align: center;
     list-style-position: inside;
 }
+
+.greenText {
+    color: rgb(0,255,0);
+}
+
+.redText {
+    color: rgb(255,0,0);
+}
+
+.blackText {
+    color: rgb(75,75,75);
+}
